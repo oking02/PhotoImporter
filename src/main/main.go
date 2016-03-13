@@ -9,7 +9,7 @@ func main() {
 
 	args := os.Args[1:]
 
-	configs := GetConfigs()
+	configs := getConfigs()
 
 	switch args[0] {
 

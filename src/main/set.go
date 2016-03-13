@@ -9,7 +9,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	//	"github.com/oking02/PhotoImporter/src/configurations"
 )
 
 func setStaff(args []string, configs Config) {

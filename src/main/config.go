@@ -16,7 +16,7 @@ func (c *Config) Parse(data []byte) error {
 	return yaml.Unmarshal(data, c)
 }
 
-func GetConfigs() Config {
+func getConfigs() Config {
 
 	data, err := ioutil.ReadFile("config.yaml")
 
