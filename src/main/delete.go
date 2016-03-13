@@ -1,9 +1,8 @@
-package deletestaff
+package main
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/oking02/PhotoImporter/configurations"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -11,13 +10,13 @@ import (
 
 const staffUsed = `Cannot delete staff. Currenty assigned to these wards:`
 
-func DeleteStaff(configs configurations.Config, args []string) {
+func deleteStaff(configs Config, args []string) {
 
 	client := &http.Client{}
 
 	uniqueString := args[1]
 
-	url := buildUrl(configs, uniqueString)
+	url := buildDeleteUrl(configs, uniqueString)
 
 	r, _ := http.NewRequest("GET", url, nil)
 
@@ -48,7 +47,7 @@ func DeleteStaff(configs configurations.Config, args []string) {
 
 }
 
-func buildUrl(configs configurations.Config, uniqueString string) string {
+func buildDeleteUrl(configs Config, uniqueString string) string {
 
 	var buffer bytes.Buffer
 

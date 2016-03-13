@@ -1,4 +1,4 @@
-package setstaff
+package main
 
 import (
 	"bytes"
@@ -9,10 +9,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"github.com/oking02/PhotoImporter/configurations"
+	//	"github.com/oking02/PhotoImporter/src/configurations"
 )
 
-func SetStaff(args []string, configs configurations.Config) {
+func setStaff(args []string, configs Config) {
 
 	client := &http.Client{}
 
@@ -21,7 +21,7 @@ func SetStaff(args []string, configs configurations.Config) {
 	uniqueId := args[2]
 
 	//Build url from args and config base url
-	url := buildUrl(configs, name, uniqueId)
+	url := buildSetUrl(configs, name, uniqueId)
 
 	//Get image base 64 from image path argument
 	imgBase64 := getImage(imagePath)
@@ -43,7 +43,7 @@ func SetStaff(args []string, configs configurations.Config) {
 
 }
 
-func buildUrl(configs configurations.Config, name, uniqueId string) string {
+func buildSetUrl(configs Config, name, uniqueId string) string {
 
 	var buffer bytes.Buffer
 

@@ -1,28 +1,27 @@
-package getstaff
+package main
 
 import (
-	"fmt"
-	"github.com/oking02/PhotoImporter/configurations"
-	"net/http"
 	"bytes"
-	"log"
+	"fmt"
 	"io/ioutil"
+	"log"
+	"net/http"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 )
 
 type Staff struct {
-	name string
-	uniqueName string
+	name         string
+	uniqueName   string
 	lastModified string
 }
 
-func GetStaff(configs configurations.Config) {
+func getStaff(configs Config) {
 
 	client := &http.Client{}
 
-	url := buildUrl(configs)
+	url := buildGetUrl(configs)
 
 	// Build Request
 	r, _ := http.NewRequest("GET", url, nil)
@@ -36,12 +35,12 @@ func GetStaff(configs configurations.Config) {
 	}
 
 	defer resp.Body.Close()
+
 	contents, err := ioutil.ReadAll(resp.Body)
 
 	staff := parseReturnString(string(contents))
-	//"\\],\\["
 
-	for i := 0; i < len(staff); i++  {
+	for i := 0; i < len(staff); i++ {
 
 		staffStr := strings.Split(staff[i], ",")
 
@@ -65,9 +64,7 @@ func GetStaff(configs configurations.Config) {
 
 }
 
-
-
-func buildUrl(configs configurations.Config) string {
+func buildGetUrl(configs Config) string {
 
 	var buffer bytes.Buffer
 
@@ -78,19 +75,18 @@ func buildUrl(configs configurations.Config) string {
 
 }
 
-
 /*
 
 	Currently Backend is returning a toString Java Array List.
 	In this format. With more than one obviously. ID , Name, Unique String, Date Last Modified
 	[[1, "John Smith", "John Smith[UniqueId]", 12345689]]
 
- */
+*/
 
 func parseReturnString(str string) []string {
 
 	str = str[1:]
-	str = str[:len(str) - 1]
+	str = str[:len(str)-1]
 
 	staffStrs := strings.Split(str, "],[")
 	lastIndex := len(staffStrs) - 1
@@ -103,7 +99,6 @@ func parseReturnString(str string) []string {
 
 }
 
-
 func removeStartChar(str string) string {
 
 	str = str[1:]
@@ -113,7 +108,7 @@ func removeStartChar(str string) string {
 func removeEndChars(str string) string {
 
 	length := len(str)
-	str = str[:length - 1]
+	str = str[:length-1]
 
 	return str
 }

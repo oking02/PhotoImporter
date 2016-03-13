@@ -2,7 +2,7 @@
 
 Port of a java command line tool to Go. For importing staff photos and profiles directly into a Ward Monitor application. 
 Currently being used by another script that scans a file system, resizes large photos and bulk imports them using this tool.
-Looking at adding the features of this script into this tool, using the many Golang image libraries. 
+Looking at adding the features of this script into this tool, using the Golang image libraries.
 
 --
 
