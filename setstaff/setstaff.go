@@ -1,39 +1,41 @@
 package setstaff
 
 import (
-	"fmt"
-	"os"
-	"log"
-	"encoding/base64"
-	_"image"
-	_"image/jpeg"
-	_ "io/ioutil"
-	_"strings"
-	"image"
 	"bytes"
+	"encoding/base64"
+	"fmt"
+	"image"
 	"image/jpeg"
+	"log"
 	"net/http"
+	"os"
+	"github.com/oking02/PhotoImporter/configurations"
 )
 
-func SetStaff(args []string ) {
+func SetStaff(args []string, configs configurations.Config) {
 
 	client := &http.Client{}
 
-	fmt.Println("Set Staff")
-
 	imagePath := args[0]
-//	name := args[1]
-//	uniqueId := args[2]
+	name := args[1]
+	uniqueId := args[2]
 
+	//Build url from args and config base url
+	url := buildUrl(configs, name, uniqueId)
+
+	//Get image base 64 from image path argument
 	imgBase64 := getImage(imagePath)
 
-	r, _ := http.NewRequest("POST", "http://localhost:8080/WardMonitor/importTool/set/Bob/Bob[Unique]", bytes.NewBufferString(imgBase64))
+	// Build Request
+	r, _ := http.NewRequest("POST", url, bytes.NewBufferString(imgBase64))
 
-	r.SetBasicAuth("ward", "monitor")
+	//Set Basic Auth using config
+	r.SetBasicAuth(configs.User, configs.Password)
 
+	//Send Request
 	_, err := client.Do(r)
 
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 
@@ -41,7 +43,21 @@ func SetStaff(args []string ) {
 
 }
 
-func getImage(path string) string{
+func buildUrl(configs configurations.Config, name, uniqueId string) string {
+
+	var buffer bytes.Buffer
+
+	buffer.WriteString(configs.BaseUrl)
+	buffer.WriteString("set/")
+	buffer.WriteString(name)
+	buffer.WriteString("/")
+	buffer.WriteString(uniqueId)
+
+	return buffer.String()
+
+}
+
+func getImage(path string) string {
 
 	reader, err := os.Open(path)
 
@@ -52,7 +68,6 @@ func getImage(path string) string{
 	defer reader.Close()
 
 	buffer := new(bytes.Buffer)
-
 
 	m, _, err := image.Decode(reader)
 

@@ -2,6 +2,7 @@
   <library name="GOPATH &lt;PhotoImporter&gt;">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
       <root url="file://$PROJECT_DIR$/../../../pdfftp" />
       <root url="file://$PROJECT_DIR$/../../../9fans.net" />
       <root url="file://$PROJECT_DIR$/../../../sourcegraph.com" />
@@ -30,6 +31,7 @@
       <root url="file://$PROJECT_DIR$/../../../9fans.net/go/.git" />
       <root url="file://$PROJECT_DIR$/../../tpng/gopkgs/.git" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/ssa/ssautil/testdata" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in/yaml.v2/.git" />
       <root url="file://$PROJECT_DIR$/../../nsf/gocode/.git" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/loader/testdata" />
       <root url="file://$PROJECT_DIR$/../../../sourcegraph.com/sqs/goreturns/_samples" />

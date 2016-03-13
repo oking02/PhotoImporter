@@ -2,18 +2,22 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"github.com/oking02/PhotoImporter/setstaff"
+	"github.com/oking02/PhotoImporter/configurations"
+	"os"
 )
 
-func main()  {
+func main() {
 
 	fmt.Println("Hello World!")
 
 	args := os.Args[1:]
 
-	argslength := len(args)
-	fmt.Println("Number of arguments: ", argslength)
+//	argslength := len(args)
+
+	configs := configurations.GetConfigs()
+
+	fmt.Println(configs)
 
 	switch args[0] {
 
@@ -21,7 +25,7 @@ func main()  {
 		fmt.Println("Get Staff")
 		break
 	case "set":
-		setstaff.SetStaff(args[1:])
+		setstaff.SetStaff(args[1:], configs)
 		break
 	default:
 		fmt.Println("Default")
@@ -29,5 +33,3 @@ func main()  {
 	}
 
 }
-
-
