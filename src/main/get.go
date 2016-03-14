@@ -11,12 +11,6 @@ import (
 	"time"
 )
 
-type Staff struct {
-	name         string
-	uniqueName   string
-	lastModified string
-}
-
 func getStaff(configs Config) {
 
 	client := &http.Client{}
@@ -45,10 +39,10 @@ func getStaff(configs Config) {
 		staffStr := strings.Split(staff[i], ",")
 
 		name := staffStr[1]
-		name = removerStartAndEndChart(name)
+		name = removerStartAndEndChart(name) //Remove "" around Name
 
 		uniqueId := staffStr[2]
-		uniqueId = removerStartAndEndChart(uniqueId)
+		uniqueId = removerStartAndEndChart(uniqueId) //Remove "" around Unique String
 
 		lastMod := staffStr[3]
 		t := msToTime(lastMod)
@@ -85,9 +79,11 @@ func buildGetUrl(configs Config) string {
 
 func parseReturnString(str string) []string {
 
+	//Remove [] from string
 	str = str[1:]
 	str = str[:len(str)-1]
 
+	//Split into splice on ],[
 	staffStrs := strings.Split(str, "],[")
 	lastIndex := len(staffStrs) - 1
 

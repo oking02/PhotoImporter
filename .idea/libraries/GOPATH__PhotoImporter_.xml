@@ -12,6 +12,7 @@
     </CLASSES>
     <SOURCES />
     <excluded>
+      <root url="file://$PROJECT_DIR$/../../nfnt/resize/.git" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/cmd/vet/testdata" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/types/testdata" />
       <root url="file://$PROJECT_DIR$/../../GoesToEleven/udemyTraining/.idea" />

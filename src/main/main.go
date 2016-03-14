@@ -22,8 +22,15 @@ func main() {
 	case "delete":
 		deleteStaff(configs, args)
 		break
+	case "test":
+		compress()
+		break
+	case "dir" :
+		resizeAllPhotos("C:\\Users\\ollyking\\Documents\\GoTests\\src\\github.com\\oking02\\PhotoImporter\\testdata", "C:\\Users\\ollyking\\Documents\\GoTests\\src\\github.com\\oking02\\PhotoImporter\\testdatadest\\")
 	default:
 		fmt.Println("Default")
 
 	}
 }
+
+
